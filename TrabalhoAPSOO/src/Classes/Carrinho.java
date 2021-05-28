@@ -1,27 +1,38 @@
 package Classes;
 
+import java.util.ArrayList;
+
 public class Carrinho {
 
-	private int qualidadeProdutos;
+	private int quatidadeProdutos;
 	private double valorVenda;
 	private String formaPagamento;
+	private ArrayList<Produto> produtos;
 	
+	public double calcularValorTotal() {
+		produtos.forEach((produto) ->  this.setValorVenda(this.getValorVenda() + produto.getPreco()));
+		return this.getValorVenda();
+	}
 	
-	public Carrinho(int qualidadeProdutos, double valorVenda, String formaPagamento) {
-		super();
-		this.qualidadeProdutos = qualidadeProdutos;
-		this.valorVenda = valorVenda;
-		this.formaPagamento = formaPagamento;
+	public void addProduto(Produto produto) {
+		produtos.add(produto);
+	}
+	
+	public void addFormaPagamento(String formaPagamento) {
+		this.setFormaPagamento(formaPagamento);
+	}
+	
+	public double troco(double valorEmDinheiro) {
+		return valorEmDinheiro - this.getValorVenda();
 	}
 
-
 	public int getQualidadeProdutos() {
-		return qualidadeProdutos;
+		return quatidadeProdutos;
 	}
 
 
 	public void setQualidadeProdutos(int qualidadeProdutos) {
-		this.qualidadeProdutos = qualidadeProdutos;
+		this.quatidadeProdutos = qualidadeProdutos;
 	}
 
 
