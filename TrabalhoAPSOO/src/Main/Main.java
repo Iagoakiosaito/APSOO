@@ -5,8 +5,11 @@ package Main;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import Controllers.ProdutoController;
 import Models.Carrinho;
@@ -20,9 +23,6 @@ public class Main {
 	public static void main(String[] args) {
 		
 		
-		Connection con = new ConnectionFactory().getConnection();
-		System.out.println("Conectou chefe, confia");
-        
 		Scanner leitor = new Scanner(System.in);
 		boolean exec = true;
 		int opcao;
@@ -64,13 +64,18 @@ public class Main {
 							carrinho.addProduto(produto);
 						}
 						
+						try {
+							TimeUnit.SECONDS.sleep(1);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}	
+						
 						
 					}while (insertProd);
 
-					//metodos de pagamento 
 					
 					double valorTotal = carrinho.calcularValorTotal();
-					System.out.println("Valor total da compra: " + valorTotal);
+					System.out.println("Valor total da compra: R$ " + valorTotal);
 					
 					System.out.println("/*********************************/");
 					
@@ -82,16 +87,27 @@ public class Main {
 					int formaPagamento = leitor.nextInt();
 					leitor.nextLine();
 					
+					
+					try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}	
+					
+					
 					carrinho.addFormaPagamento(formaPagamento);
 					Venda venda = new Venda(java.time.LocalDate.now().toString(), java.time.LocalTime.now().toString(), carrinho);
 					
 					if(formaPagamento == 1) {
+						System.out.println("/*********************************/");
 						System.out.println("Qual o valor pago?");
+						
 						double dinheiroCliente = leitor.nextDouble();
 						leitor.nextLine();
 						
 						double troco = carrinho.troco(dinheiroCliente);
-						System.out.println("Valor do troco a ser dado: " + troco);
+						
+						System.out.println("Valor do troco a ser dado: R$ " + troco);
 					}
 					
 					
@@ -105,6 +121,7 @@ public class Main {
 		}while(exec);
 		
 		System.out.println("Bye!");
+		
 	}
 
 }

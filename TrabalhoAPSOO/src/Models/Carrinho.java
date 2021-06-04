@@ -9,6 +9,10 @@ public class Carrinho {
 	private String formaPagamento;
 	private ArrayList<Produto> produtos;
 	
+	public Carrinho() {
+		produtos = new ArrayList<Produto>();
+	}
+	
 	public double calcularValorTotal() {
 		produtos.forEach((produto) ->  this.setValorVenda(this.getValorVenda() + produto.getPreco()));
 		return this.getValorVenda();
@@ -20,6 +24,7 @@ public class Carrinho {
 	
 	public void addProduto(Produto produto) {
 		produtos.add(produto);
+		System.out.println(produto.getNomeProduto() + " adicionado ao carrinho");
 	}
 	
 	public void addFormaPagamento(int formaPagamento) {
