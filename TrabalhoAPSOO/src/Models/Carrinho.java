@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public class Carrinho {
 
-	private int quatidadeProdutos;
+	private int quantidadeProdutos;
 	private double valorVenda;
-	private String formaPagamento;
+	private int formaPagamento;
 	private ArrayList<Produto> produtos;
 	
 	public Carrinho() {
+		this.setQuantidadeProdutos(0);
 		produtos = new ArrayList<Produto>();
 	}
 	
-	public double calcularValorTotal() {
+	public void calcularValorTotal() {
 		produtos.forEach((produto) ->  this.setValorVenda(this.getValorVenda() + produto.getPreco()));
-		return this.getValorVenda();
 	}
 	
 	public void descontarProdutosEstoque() {
@@ -24,35 +24,25 @@ public class Carrinho {
 	
 	public void addProduto(Produto produto) {
 		produtos.add(produto);
+		this.setQuantidadeProdutos(this.getQuantidadeProdutos() + 1);
 		System.out.println(produto.getNomeProduto() + " adicionado ao carrinho");
 	}
 	
 	public void addFormaPagamento(int formaPagamento) {
-		
-		switch(formaPagamento) {
-			case 1:
-				this.setFormaPagamento("Dinheiro");
-				break;
-			case 2:
-				this.setFormaPagamento("Cartão de crédito/débito");
-				break;
-			default:
-				this.setFormaPagamento("Isso não existe cara");
-		}
-		
+		this.setFormaPagamento(formaPagamento);
 	}
 	
 	public double troco(double valorEmDinheiro) {
 		return valorEmDinheiro - this.getValorVenda();
 	}
 
-	public int getQualidadeProdutos() {
-		return quatidadeProdutos;
+	public int getQuantidadeProdutos() {
+		return quantidadeProdutos;
 	}
 
 
-	public void setQualidadeProdutos(int qualidadeProdutos) {
-		this.quatidadeProdutos = qualidadeProdutos;
+	public void setQuantidadeProdutos(int quantidadeProdutos) {
+		this.quantidadeProdutos = quantidadeProdutos;
 	}
 
 
@@ -66,13 +56,19 @@ public class Carrinho {
 	}
 
 
-	public String getFormaPagamento() {
+	public int getFormaPagamento() {
 		return formaPagamento;
 	}
 
 
-	public void setFormaPagamento(String formaPagamento) {
+	public void setFormaPagamento(int formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+
+	@Override
+	public String toString() {
+		return "Carrinho [quantidadeProdutos=" + quantidadeProdutos + ", valorVenda=" + valorVenda + ", formaPagamento="
+				+ formaPagamento + "]";
 	}
 	
 	
