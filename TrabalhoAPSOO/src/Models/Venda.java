@@ -14,6 +14,15 @@ public class Venda {
 		this.horaVendaString = horaVendaString;
 		this.carrinho = carrinho;
 	}
+	
+	public boolean temDesconto(){
+		return (this.cliente.getQtdVenda() >= 5) ? true : false;
+	}
+	
+	public void postVenda() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	public String getDataVenda() {
 		return dataVenda;

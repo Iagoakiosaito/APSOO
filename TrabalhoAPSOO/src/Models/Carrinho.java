@@ -22,8 +22,19 @@ public class Carrinho {
 		produtos.add(produto);
 	}
 	
-	public void addFormaPagamento(String formaPagamento) {
-		this.setFormaPagamento(formaPagamento);
+	public void addFormaPagamento(int formaPagamento) {
+		
+		switch(formaPagamento) {
+			case 1:
+				this.setFormaPagamento("Dinheiro");
+				break;
+			case 2:
+				this.setFormaPagamento("Cartão de crédito/débito");
+				break;
+			default:
+				this.setFormaPagamento("Isso não existe cara");
+		}
+		
 	}
 	
 	public double troco(double valorEmDinheiro) {
