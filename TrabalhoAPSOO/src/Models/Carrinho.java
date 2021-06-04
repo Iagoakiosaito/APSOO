@@ -1,4 +1,4 @@
-package Classes;
+package Models;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,10 @@ public class Carrinho {
 	public double calcularValorTotal() {
 		produtos.forEach((produto) ->  this.setValorVenda(this.getValorVenda() + produto.getPreco()));
 		return this.getValorVenda();
+	}
+	
+	public void descontarProdutosEstoque() {
+		produtos.forEach((produto) -> produto.descontarEstoque());
 	}
 	
 	public void addProduto(Produto produto) {
