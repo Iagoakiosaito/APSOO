@@ -3,25 +3,20 @@ package Models;
 public class Venda {
 
 	private String dataVenda;
-	private String horaVendaString;
+	private String horaVenda;
 	private Carrinho carrinho;
 	private Funcionario funcionario;
 	private Cliente cliente;
 	
-	public Venda(String dataVenda, String horaVendaString, Carrinho carrinho) {
+	public Venda(String dataVenda, String horaVenda, Carrinho carrinho) {
 		super();
 		this.dataVenda = dataVenda;
-		this.horaVendaString = horaVendaString;
+		this.horaVenda = horaVenda;
 		this.carrinho = carrinho;
 	}
 	
 	public boolean temDesconto(){
 		return (this.cliente.getQtdVenda() >= 5) ? true : false;
-	}
-	
-	public void postVenda() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public String getDataVenda() {
@@ -33,11 +28,11 @@ public class Venda {
 	}
 
 	public String getHoraVendaString() {
-		return horaVendaString;
+		return horaVenda;
 	}
 
-	public void setHoraVendaString(String horaVendaString) {
-		this.horaVendaString = horaVendaString;
+	public void setHoraVendaString(String horaVenda) {
+		this.horaVenda = horaVenda;
 	}
 
 	public Carrinho getCarrinho() {

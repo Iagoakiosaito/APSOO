@@ -72,5 +72,22 @@ public class ProdutoController {
 		
 	}
 	
+	public static void delete(Produto produto) {
+		
+		Connection conn = new ConnectionFactory().getConnection();
+		
+		try {
+			String sql             = "UPDATE TABLE produto SET WHERE codigoProduto=?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, Integer.toString(produto.getCodigoProduto()));
+			
+		    ResultSet resultQuerry = stmt.executeQuery();
+		    resultQuerry.first();
+		    
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	
 }

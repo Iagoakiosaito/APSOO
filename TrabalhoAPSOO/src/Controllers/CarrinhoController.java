@@ -11,8 +11,7 @@ import database.ConnectionFactory;
 
 public class CarrinhoController {
 
-	
-	public static void store(Carrinho carrinho) {
+	public static Carrinho store(Carrinho carrinho) {
 		
 		Connection conn = new ConnectionFactory().getConnection();
 		
@@ -25,6 +24,15 @@ public class CarrinhoController {
 			stmt.setString(3, Integer.toString(carrinho.getFormaPagamento()));
 			
 		    stmt.executeQuery();
+		    
+		    sql  = "SELECT MAX(idCarrinho) as idCarrinho FROM Carrinho";
+			stmt = conn.prepareStatement(sql);
+			ResultSet resultQuerry = stmt.executeQuery();
+		    resultQuerry.first();
+		    
+		    int idCarrinho = resultQuerry.getInt("idCarrinho");
+		    carrinho.setIdCarrinho(idCarrinho);
+		    return carrinho;
 		  	    
 		} catch(SQLException e) {
 			throw new RuntimeException(e);

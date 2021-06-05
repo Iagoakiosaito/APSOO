@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Carrinho {
 
+	private int idCarrinho;
 	private int quantidadeProdutos;
 	private double valorVenda;
 	private int formaPagamento;
@@ -63,6 +64,15 @@ public class Carrinho {
 
 	public void setFormaPagamento(int formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+	
+
+	public int getIdCarrinho() {
+		return idCarrinho;
+	}
+
+	public void setIdCarrinho(int idCarrinho) {
+		this.idCarrinho = idCarrinho;
 	}
 
 	@Override

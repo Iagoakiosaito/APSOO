@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import Controllers.CarrinhoController;
 import Controllers.ProdutoController;
+import Controllers.VendaController;
 import Models.Carrinho;
 import Models.Produto;
 import Models.Venda;
@@ -116,10 +117,11 @@ public class Main {
 						System.out.println("\nValor do troco a ser dado: R$ " + troco + "\n");
 					}
 					
+					carrinho = CarrinhoController.store(carrinho);
 					
-					CarrinhoController.store(carrinho);
-					venda.postVenda();
-					carrinho.descontarProdutosEstoque();
+					venda.addCarrinho(carrinho);
+					VendaController.store(venda);
+					
 					
 					break;
 			}
