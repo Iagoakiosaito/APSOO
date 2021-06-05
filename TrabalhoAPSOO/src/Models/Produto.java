@@ -20,6 +20,11 @@ public class Produto {
 		this.setQuantidadeEstoque(this.getQuantidadeEstoque() - 1);
 	}
 
+	
+	public void listarProduto() {
+		System.out.println("[" + this.getCodigoProduto() + "]" + " - " + this.getNomeProduto());
+	}
+	
 	public int getCodigoProduto() {
 		return codigoProduto;
 	}

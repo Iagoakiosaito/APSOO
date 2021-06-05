@@ -8,10 +8,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import Controllers.CarrinhoController;
 import Controllers.ProdutoController;
+import Controllers.VendaController;
 import Models.Carrinho;
 import Models.Produto;
 import Models.Venda;
@@ -29,7 +32,7 @@ public class Main {
 		do {
 			
 			System.out.println("[ 0 ] - encerrar execucao\n"
-							 + "[ 1 ] - iniciar nova venda");
+							 + "[ 1 ] - iniciar nova venda\n\n");
 			
 			
 			opcao = leitor.nextInt();
@@ -39,7 +42,6 @@ public class Main {
 			
 				case 0:
 					exec = false;
-					
 					break;
 			
 				case 1:
@@ -47,10 +49,15 @@ public class Main {
 					boolean insertProd = true;
 					int codProduto;
 					
+					//Listar produtos
+					System.out.println("\n/-------------------Produtos disponiveis-------------------/\n");
+					ArrayList<Produto> produtos = ProdutoController.index();
+					produtos.forEach((produto) -> produto.listarProduto());
+					System.out.println("\n/-------------------------------/");
 					//Adicionando produtos no carrinho
 					do{
-						System.out.println("Insira o codigo de produto para ser adicionado");
-						System.out.println("[ 0 ] - finalizar adicoes");
+						System.out.println("\nInsira o codigo de produto para ser adicionado");
+						System.out.println("[ 0 ] - finalizar adicoes\n\n");
 						
 						codProduto = leitor.nextInt();
 						leitor.nextLine();
@@ -73,15 +80,14 @@ public class Main {
 						
 					}while (insertProd);
 
+					carrinho.calcularValorTotal();
+					System.out.println("\nValor total da compra: R$ " + carrinho.getValorVenda());
 					
-					double valorTotal = carrinho.calcularValorTotal();
-					System.out.println("Valor total da compra: R$ " + valorTotal);
-					
-					System.out.println("/*********************************/");
+					System.out.println("/*********************************/\n");
 					
 					System.out.println("Qual será a forma de pagamento?\n"
 									 + "[ 1 ] - Dinheiro\n"
-									 + "[ 2 ] - Cartão de crédito/débito");
+									 + "[ 2 ] - Cartão de crédito/débito\n\n");
 
 					
 					int formaPagamento = leitor.nextInt();
@@ -96,24 +102,26 @@ public class Main {
 					
 					
 					carrinho.addFormaPagamento(formaPagamento);
+					
 					Venda venda = new Venda(java.time.LocalDate.now().toString(), java.time.LocalTime.now().toString(), carrinho);
 					
 					if(formaPagamento == 1) {
-						System.out.println("/*********************************/");
-						System.out.println("Qual o valor pago?");
+						System.out.println("\n/*********************************/\n");
+						System.out.println("Qual o valor pago?\n\n");
 						
 						double dinheiroCliente = leitor.nextDouble();
 						leitor.nextLine();
 						
 						double troco = carrinho.troco(dinheiroCliente);
 						
-						System.out.println("Valor do troco a ser dado: R$ " + troco);
+						System.out.println("\nValor do troco a ser dado: R$ " + troco + "\n");
 					}
 					
+					carrinho = CarrinhoController.store(carrinho);
 					
-					//bd
-					venda.postVenda();
-					carrinho.descontarProdutosEstoque();
+					venda.addCarrinho(carrinho);
+					VendaController.store(venda);
+					
 					
 					break;
 			}
