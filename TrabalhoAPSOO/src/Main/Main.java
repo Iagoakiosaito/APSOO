@@ -121,6 +121,7 @@ public class Main {
 					
 					venda.addCarrinho(carrinho);
 					VendaController.store(venda);
+					carrinho.getProdutos().forEach((produto) -> ProdutoController.delete(produto));
 					
 					
 					break;

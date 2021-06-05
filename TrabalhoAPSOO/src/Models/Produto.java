@@ -16,11 +16,6 @@ public class Produto {
 		this.setTipoProduto(tipoProduto);
 	}
 	
-	public void descontarEstoque() {
-		this.setQuantidadeEstoque(this.getQuantidadeEstoque() - 1);
-	}
-
-	
 	public void listarProduto() {
 		System.out.println("[" + this.getCodigoProduto() + "]" + " - " + this.getNomeProduto());
 	}

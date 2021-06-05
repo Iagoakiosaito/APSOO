@@ -77,7 +77,7 @@ public class ProdutoController {
 		Connection conn = new ConnectionFactory().getConnection();
 		
 		try {
-			String sql             = "UPDATE TABLE produto SET WHERE codigoProduto=?";
+			String sql             = "UPDATE Produto SET quantidadeEstoque=quantidadeEstoque-1 WHERE codigoProduto=?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, Integer.toString(produto.getCodigoProduto()));
 			
