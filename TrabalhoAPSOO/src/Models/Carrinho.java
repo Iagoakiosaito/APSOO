@@ -19,9 +19,6 @@ public class Carrinho {
 		produtos.forEach((produto) ->  this.setValorVenda(this.getValorVenda() + produto.getPreco()));
 	}
 	
-	public void descontarProdutosEstoque() {
-		produtos.forEach((produto) -> produto.descontarEstoque());
-	}
 	
 	public void addProduto(Produto produto) {
 		produtos.add(produto);
@@ -79,6 +76,14 @@ public class Carrinho {
 	public String toString() {
 		return "Carrinho [quantidadeProdutos=" + quantidadeProdutos + ", valorVenda=" + valorVenda + ", formaPagamento="
 				+ formaPagamento + "]";
+	}
+
+	public ArrayList<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(ArrayList<Produto> produtos) {
+		this.produtos = produtos;
 	}
 	
 	
