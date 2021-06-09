@@ -67,7 +67,7 @@ public class ProdutoController {
 		    return new Produto(codigoProduto, nomeProduto, preco, quantidadeEstoque, tipoProduto);
 		    
 		} catch(SQLException e) {
-			throw new RuntimeException(e);
+			return null;
 		}
 		
 	}
