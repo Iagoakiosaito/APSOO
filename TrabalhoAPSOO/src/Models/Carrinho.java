@@ -11,7 +11,6 @@ public class Carrinho {
 	private ArrayList<Produto> produtos;
 	
 	public Carrinho() {
-		this.setQuantidadeProdutos(0);
 		produtos = new ArrayList<Produto>();
 	}
 	
@@ -22,8 +21,7 @@ public class Carrinho {
 	
 	public void addProduto(Produto produto) {
 		produtos.add(produto);
-		this.setQuantidadeProdutos(this.getQuantidadeProdutos() + 1);
-		System.out.println(produto.getNomeProduto() + " adicionado ao carrinho");
+		System.out.println("\n" + produto.getNomeProduto() + " adicionado ao carrinho");
 	}
 	
 	public void addFormaPagamento(int formaPagamento) {
@@ -31,18 +29,12 @@ public class Carrinho {
 	}
 	
 	public double troco(double valorEmDinheiro) {
-		return valorEmDinheiro - this.getValorVenda();
+		return Math.round(valorEmDinheiro - this.getValorVenda());
 	}
 
 	public int getQuantidadeProdutos() {
-		return quantidadeProdutos;
+		return this.getProdutos().size();
 	}
-
-
-	public void setQuantidadeProdutos(int quantidadeProdutos) {
-		this.quantidadeProdutos = quantidadeProdutos;
-	}
-
 
 	public double getValorVenda() {
 		return valorVenda;
