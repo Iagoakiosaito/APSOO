@@ -18,20 +18,23 @@ public class Carrinho {
 		produtosCarrinho.forEach((produto) ->  this.setValorVenda(this.getValorVenda() + produto.getPreco()));
 	}
 	
-	public void addProduto(Produto produto) {
-		if(this.getProdutos().size() != 0) {
-			for(int i = 0; i <= this.getProdutos().size(); i++) {
+	public void addProduto(Produto produto) {		
+		if(this.getProdutos().size() > 0) {
+			for(int i = 0; i < this.getProdutos().size(); i++) {
 				if(produto.getCodigoProduto() == produtosCarrinho.get(i).getCodigoProduto()) {
 					produtosCarrinho.get(i).setQuantidadeProduto(produtosCarrinho.get(i).getQuantidadeProduto() + 1);
 					produtosCarrinho.get(i).setPreco(produtosCarrinho.get(i).getPreco() + produto.getPreco());
-				}else {
-					ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho(produto.getCodigoProduto(), produto.getPreco());
-					produtosCarrinho.add(produtoCarrinho);
 					break;
+					
+				}else {
+					ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho(produto.getNomeProduto(), produto.getCodigoProduto(), produto.getPreco());
+					produtosCarrinho.add(produtoCarrinho);
+					break; 
+					
 				}
 			}
 		}else {
-			ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho(produto.getCodigoProduto(), produto.getPreco());
+			ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho(produto.getNomeProduto(), produto.getCodigoProduto(), produto.getPreco());
 			produtosCarrinho.add(produtoCarrinho);
 		}
 		System.out.println("\n" + produto.getNomeProduto() + " adicionado ao carrinho");
