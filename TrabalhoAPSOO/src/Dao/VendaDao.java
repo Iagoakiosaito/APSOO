@@ -1,4 +1,4 @@
-package Controllers;
+package Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import Models.Venda;
 import database.ConnectionFactory;
 
-public class VendaController {
+public class VendaDao {
 	
 	
 	public static void store(Venda venda) {

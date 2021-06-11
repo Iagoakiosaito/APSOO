@@ -8,19 +8,32 @@ public class Carrinho {
 	private int quantidadeProdutos;
 	private double valorVenda;
 	private int formaPagamento;
-	private ArrayList<Produto> produtos;
+	private ArrayList<ProdutoCarrinho> produtosCarrinho;
 	
 	public Carrinho() {
-		produtos = new ArrayList<Produto>();
+		produtosCarrinho = new ArrayList<ProdutoCarrinho>();
 	}
 	
 	public void calcularValorTotal() {
-		produtos.forEach((produto) ->  this.setValorVenda(this.getValorVenda() + produto.getPreco()));
+		produtosCarrinho.forEach((produto) ->  this.setValorVenda(this.getValorVenda() + produto.getPreco()));
 	}
 	
-	
 	public void addProduto(Produto produto) {
-		produtos.add(produto);
+		if(this.getProdutos().size() != 0) {
+			for(int i = 0; i <= this.getProdutos().size(); i++) {
+				if(produto.getCodigoProduto() == produtosCarrinho.get(i).getCodigoProduto()) {
+					produtosCarrinho.get(i).setQuantidadeProduto(produtosCarrinho.get(i).getQuantidadeProduto() + 1);
+					produtosCarrinho.get(i).setPreco(produtosCarrinho.get(i).getPreco() + produto.getPreco());
+				}else {
+					ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho(produto.getCodigoProduto(), produto.getPreco());
+					produtosCarrinho.add(produtoCarrinho);
+					break;
+				}
+			}
+		}else {
+			ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho(produto.getCodigoProduto(), produto.getPreco());
+			produtosCarrinho.add(produtoCarrinho);
+		}
 		System.out.println("\n" + produto.getNomeProduto() + " adicionado ao carrinho");
 	}
 	
@@ -70,14 +83,9 @@ public class Carrinho {
 				+ formaPagamento + "]";
 	}
 
-	public ArrayList<Produto> getProdutos() {
-		return produtos;
+	public ArrayList<ProdutoCarrinho> getProdutos() {
+		return produtosCarrinho;
 	}
-
-	public void setProdutos(ArrayList<Produto> produtos) {
-		this.produtos = produtos;
-	}
-	
 	
 	
 }
