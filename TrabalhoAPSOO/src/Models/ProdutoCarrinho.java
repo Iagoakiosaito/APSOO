@@ -7,7 +7,8 @@ public class ProdutoCarrinho {
 	private double preco;
 	private int quantidadeProduto = 1;
 	
-	public ProdutoCarrinho(int codigoProduto, double preco) {
+	public ProdutoCarrinho(String nomeProduto, int codigoProduto, double preco) {
+		this.setNomeProduto(nomeProduto);
 		this.setCodigoProduto(codigoProduto);
 		this.setPreco(preco);
 	}
