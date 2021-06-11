@@ -18,6 +18,14 @@ public class Venda {
 	public boolean temDesconto(){
 		return (this.cliente.getQtdVenda() >= 5) ? true : false;
 	}
+	
+	public void listarVenda() {
+		System.out.println("----Dados da venda----");
+		System.out.println("Valor da venda: R$ " + this.getCarrinho().getValorVenda());
+		System.out.println("Produtos: ");
+		this.getCarrinho().getProdutos().forEach((produto) -> System.out.println("- " + produto.getQuantidadeProduto() + " " + produto.getNomeProduto() + produto.getQuantidadeProduto() + " - " + produto.getPreco()));
+		System.out.println("Data e hora da venda: " + this.getDataVenda() + " " + this.getHoraVendaString());
+	}
 
 	public String getDataVenda() {
 		return dataVenda;

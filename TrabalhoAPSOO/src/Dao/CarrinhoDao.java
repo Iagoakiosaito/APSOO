@@ -1,4 +1,4 @@
-package Controllers;
+package Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import Models.Carrinho;
 import Models.Produto;
 import database.ConnectionFactory;
 
-public class CarrinhoController {
+public class CarrinhoDao {
 
 	public static Carrinho store(Carrinho carrinho) {
 		

@@ -1,4 +1,4 @@
-package Controllers;
+package Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Models.Produto;
+import Models.ProdutoCarrinho;
 import database.ConnectionFactory;
 
-public class ProdutoController {
+public class ProdutoDao {
 	
 	
 	
@@ -72,12 +73,14 @@ public class ProdutoController {
 		
 	}
 	
-	public static void delete(Produto produto) {
+	public static void delete(ProdutoCarrinho produto) {
 		
 		Connection conn = new ConnectionFactory().getConnection();
 		
 		try {
-			String sql             = "UPDATE Produto SET quantidadeEstoque=quantidadeEstoque-1 WHERE codigoProduto=?";
+			String sql             = "UPDATE Produto SET quantidadeEstoque=quantidadeEstoque-" + 
+									  Integer.toString(produto.getQuantidadeProduto()) + 
+									  " WHERE codigoProduto=?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, Integer.toString(produto.getCodigoProduto()));
 			
