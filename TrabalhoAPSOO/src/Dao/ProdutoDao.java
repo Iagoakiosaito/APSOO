@@ -37,6 +37,7 @@ public class ProdutoDao {
           }
           resultQuerry.close();
           stmt.close();
+          conn.close();
           return produtos;
       } catch (SQLException e) {
           throw new RuntimeException(e);
@@ -64,7 +65,7 @@ public class ProdutoDao {
 			
 			resultQuerry.close();
 	        stmt.close();
-			
+	        conn.close();
 		    return new Produto(codigoProduto, nomeProduto, preco, quantidadeEstoque, tipoProduto);
 		    
 		} catch(SQLException e) {
@@ -86,6 +87,10 @@ public class ProdutoDao {
 			
 		    ResultSet resultQuerry = stmt.executeQuery();
 		    resultQuerry.first();
+		    
+		    resultQuerry.close();
+	        stmt.close();
+	        conn.close();
 		    
 		} catch(SQLException e) {
 			throw new RuntimeException(e);

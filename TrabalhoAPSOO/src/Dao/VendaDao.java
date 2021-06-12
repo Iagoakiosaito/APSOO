@@ -24,6 +24,7 @@ public class VendaDao {
 			stmt.setString(3, venda.getHoraVendaString());
 			
 		    stmt.executeQuery();
+		    conn.close();
 		    
 		} catch(SQLException e) {
 			throw new RuntimeException(e);

@@ -6,7 +6,7 @@ public class Carrinho {
 
 	private int idCarrinho;
 	private int quantidadeProdutos;
-	private double valorVenda;
+	private double valorVenda = 0;
 	private int formaPagamento;
 	private ArrayList<ProdutoCarrinho> produtosCarrinho;
 	
@@ -18,25 +18,30 @@ public class Carrinho {
 		produtosCarrinho.forEach((produto) ->  this.setValorVenda(this.getValorVenda() + produto.getPreco()));
 	}
 	
-	public void addProduto(Produto produto) {		
-		if(this.getProdutos().size() > 0) {
+	public void addProduto(Produto produto) {	
+		if(this.getProdutos().size() == 0) {
+			ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho(produto.getNomeProduto(), produto.getCodigoProduto(), produto.getPreco());
+			this.getProdutos().add(produtoCarrinho);
+		}else {
+			boolean achou = false;
 			for(int i = 0; i < this.getProdutos().size(); i++) {
 				if(produto.getCodigoProduto() == produtosCarrinho.get(i).getCodigoProduto()) {
 					produtosCarrinho.get(i).setQuantidadeProduto(produtosCarrinho.get(i).getQuantidadeProduto() + 1);
 					produtosCarrinho.get(i).setPreco(produtosCarrinho.get(i).getPreco() + produto.getPreco());
+					achou = true;
 					break;
-					
-				}else {
-					ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho(produto.getNomeProduto(), produto.getCodigoProduto(), produto.getPreco());
-					produtosCarrinho.add(produtoCarrinho);
-					break; 
-					
+						
 				}
+			}	
+			if(!achou) {
+				ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho(produto.getNomeProduto(), produto.getCodigoProduto(), produto.getPreco());
+				produtosCarrinho.add(produtoCarrinho);
 			}
-		}else {
-			ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho(produto.getNomeProduto(), produto.getCodigoProduto(), produto.getPreco());
-			produtosCarrinho.add(produtoCarrinho);
+			
 		}
+		
+		
+		
 		System.out.println("\n" + produto.getNomeProduto() + " adicionado ao carrinho");
 	}
 	
