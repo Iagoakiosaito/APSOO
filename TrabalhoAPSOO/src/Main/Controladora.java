@@ -13,7 +13,7 @@ import Models.Venda;
 
 public class Controladora {
 	
-	public static void realizarVenda() {
+	public static Venda realizarVenda() {
 		Scanner leitor = new Scanner(System.in);
 		Carrinho carrinho = new Carrinho();
 		boolean insertProd = true;
@@ -114,18 +114,24 @@ public class Controladora {
 			carrinho = CarrinhoDao.store(carrinho);
 			
 			venda.addCarrinho(carrinho);
-			VendaDao.store(venda);
-			carrinho.getProdutos().forEach((produto) -> ProdutoDao.delete(produto));
 			
-			try {
-				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}	
-			
-			venda.listarVenda();
-				
+			return venda;
 		}
+		
+		return null;
+	}
+	
+	public static void finalizarVenda(Venda venda) {
+		VendaDao.store(venda);
+		venda.getCarrinho().getProdutos().forEach((produto) -> ProdutoDao.delete(produto));
+		
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}	
+		
+		venda.listarVenda();
 	}
 	
 	

@@ -32,6 +32,11 @@ public class CarrinhoDao {
 		    
 		    int idCarrinho = resultQuerry.getInt("idCarrinho");
 		    carrinho.setIdCarrinho(idCarrinho);
+		    
+		    resultQuerry.close();
+	        stmt.close();
+	        conn.close();
+	        
 		    return carrinho;
 		  	    
 		} catch(SQLException e) {

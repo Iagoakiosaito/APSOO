@@ -34,7 +34,13 @@ public class Interface {
 						break;
 				
 					case 1:
-						Controladora.realizarVenda();
+						 Venda venda = Controladora.realizarVenda();
+						
+						if(venda != null) {
+							Controladora.finalizarVenda(venda);
+						}
+						
+						break;
 				}
 				
 			}while(exec);

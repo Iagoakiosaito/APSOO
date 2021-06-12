@@ -23,7 +23,7 @@ public class Venda {
 		System.out.println("----Dados da venda----");
 		System.out.println("Valor da venda: R$ " + this.getCarrinho().getValorVenda());
 		System.out.println("Produtos: ");
-		this.getCarrinho().getProdutos().forEach((produto) -> System.out.println("- " + produto.getQuantidadeProduto() + " " + produto.getNomeProduto() + " - " + produto.getPreco()));
+		this.getCarrinho().getProdutos().forEach((produto) -> System.out.println("- " + produto.getQuantidadeProduto() + "x " + produto.getNomeProduto() + " - R$ " + produto.getPreco()));
 		System.out.println("Data e hora da venda: " + this.getDataVenda() + " " + this.getHoraVendaString());
 	}
 
