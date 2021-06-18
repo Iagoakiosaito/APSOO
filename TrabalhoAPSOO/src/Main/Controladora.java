@@ -1,5 +1,8 @@
 package Main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -133,6 +136,39 @@ public class Controladora {
 		
 		venda.listarVenda();
 	}
-	
+
+	public static void gerarPedidoDeCompraDeInsumos() {
+		try {
+			String path = "/home/volpe";
+			PrintWriter pw = new PrintWriter(new File( path + "/Erva_da_boa/teste_table1.csv"));
+			StringBuilder builder = new StringBuilder();
+			builder.append("Código do produto,");
+			builder.append("Nome do produto,");
+			builder.append("Quantidade Estoque\n");
+			
+			builder.append("1,");
+			builder.append("Erva de menta,");
+			builder.append("188\n");
+			
+			pw.write(builder.toString());
+		    pw.close();
+		    
+		    //System.out.println(builder.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+//		builder.append("estou ");
+//		builder.append("concatenando ");
+//		builder.append("strings!");
+		
+		
+		
+		
+		
+		
+	}
 	
 }

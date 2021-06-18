@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import Dao.CarrinhoDao;
 import Dao.ProdutoDao;
 import Dao.VendaDao;
+import Enum.OperacaoEnum;
 import Main.Controladora;
 import Models.Carrinho;
 import Models.Produto;
@@ -22,7 +23,8 @@ public class Interface {
 			do {
 				
 				System.out.println("\n[ 0 ] - Encerrar execução\n"
-								 + "[ 1 ] - Iniciar nova venda\n\n");
+								 + "[ 1 ] - Iniciar nova venda\n"
+								 + "[ 2 ] - Gerar pedido de compra de insumos\n");
 				
 				opcao = leitor.nextInt();
 				leitor.nextLine();
@@ -33,13 +35,16 @@ public class Interface {
 						exec = false;
 						break;
 				
-					case 1:
+					case OperacaoEnum.REALIZAR_VENDA:
 						 Venda venda = Controladora.realizarVenda();
 						
 						if(venda != null) {
 							Controladora.finalizarVenda(venda);
 						}
 						
+						break;
+					case OperacaoEnum.GERAR_PEDIDO_DE_INSUMOS: 
+						Controladora.gerarPedidoDeCompraDeInsumos();
 						break;
 				}
 				
