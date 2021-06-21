@@ -11,8 +11,10 @@ import Dao.CarrinhoDao;
 import Dao.ProdutoDao;
 import Dao.VendaDao;
 import Models.Carrinho;
+import Models.PedidoInsumos;
 import Models.Produto;
 import Models.Venda;
+import util.CsvManager;
 
 public class Controladora {
 	
@@ -138,37 +140,55 @@ public class Controladora {
 	}
 
 	public static void gerarPedidoDeCompraDeInsumos() {
-		try {
-			String path = "/home/volpe";
-			PrintWriter pw = new PrintWriter(new File( path + "/Erva_da_boa/teste_table1.csv"));
-			StringBuilder builder = new StringBuilder();
-			builder.append("Código do produto,");
-			builder.append("Nome do produto,");
-			builder.append("Quantidade Estoque\n");
+		Scanner leitor       = new Scanner(System.in);
+		CsvManager csv       = new CsvManager();
+		PedidoInsumos pedido = new PedidoInsumos();
+		boolean insertProd   = true;
+		
+		do{
+			System.out.println("\nInsira o código de produto para ser adicionado\n");
+			System.out.println("[ 0 ] - finalizar adições\n\n");
 			
-			builder.append("1,");
-			builder.append("Erva de menta,");
-			builder.append("188\n");
+			int codProduto = leitor.nextInt();
+			leitor.nextLine();
 			
-			pw.write(builder.toString());
-		    pw.close();
-		    
-		    //System.out.println(builder.toString());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+			if(codProduto == 0) {
+				insertProd = false;
+			}
+			else {
+				Produto produto = ProdutoDao.findProdByCod(codProduto);
+				
+				if(produto == null) {
+					System.out.println("\nProduto não encontrado!\n\n");
+				} else {
+					System.out.println("Insira a quantidade\n\r");
+					int quantidade = leitor.nextInt();
+					leitor.nextLine();
+					
+					pedido.adicionarProduto(produto, quantidade);
+				}	
+			}
+			
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}	
+			
+			csv.gerarPedido(pedido);
+			
+		}while (insertProd);
 		
-		
-		
-//		builder.append("estou ");
-//		builder.append("concatenando ");
-//		builder.append("strings!");
-		
-		
-		
-		
-		
-		
+		System.out.println("Pedido gerado");
+		pedido.listarPedido();
+	}
+	
+	public static void checarEstoque() {
+		System.out.println("\n/-------------------Produtos no estoque-------------------/\n");
+		ArrayList<Produto> produtosEmEstoque = ProdutoDao.index();
+		System.out.println("Código do produto | Nome do produto | Quantidade em estoque\n");
+		produtosEmEstoque.forEach((produto) -> produto.listarProdutoEstoque());
+		System.out.println("\n/-------------------------------/");
 	}
 	
 }

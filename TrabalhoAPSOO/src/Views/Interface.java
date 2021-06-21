@@ -44,6 +44,7 @@ public class Interface {
 						
 						break;
 					case OperacaoEnum.GERAR_PEDIDO_DE_INSUMOS: 
+						Controladora.checarEstoque();
 						Controladora.gerarPedidoDeCompraDeInsumos();
 						break;
 				}
