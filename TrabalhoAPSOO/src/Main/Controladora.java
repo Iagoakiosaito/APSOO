@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import Dao.CarrinhoDao;
+import Dao.PedidoInsumosDao;
 import Dao.ProdutoDao;
 import Dao.VendaDao;
 import Models.Carrinho;
@@ -175,9 +176,11 @@ public class Controladora {
 				e.printStackTrace();
 			}	
 			
-			csv.gerarPedido(pedido);
 			
 		}while (insertProd);
+		
+		PedidoInsumosDao.store(pedido);
+		csv.gerarPedido(pedido);
 		
 		System.out.println("Pedido gerado");
 		pedido.listarPedido();
