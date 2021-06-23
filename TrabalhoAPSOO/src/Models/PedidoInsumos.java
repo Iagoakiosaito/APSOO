@@ -8,7 +8,7 @@ public class PedidoInsumos {
 	private ArrayList<ProdutoDoPedido> produtosPedido;
 	
 	public PedidoInsumos() {
-		this.setDataPedido(java.time.LocalTime.now().toString());
+		this.setDataPedido(java.time.LocalDate.now().toString());
 		produtosPedido = new ArrayList<ProdutoDoPedido>();
 	}
 	
@@ -25,9 +25,6 @@ public class PedidoInsumos {
 			ProdutoDoPedido produtoPedido = new ProdutoDoPedido(produto.getNomeProduto(), produto.getCodigoProduto(), quantidade);
 			produtosPedido.add(produtoPedido);
 		}
-		
-//		ProdutoDoPedido produtoPedido = new ProdutoDoPedido(produto.getNomeProduto(), produto.getCodigoProduto(), quantidade);
-//		produtosPedido.add(produtoPedido);
 	}
 	
 	public void listarPedido() {
